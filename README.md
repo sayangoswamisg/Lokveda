@@ -1,169 +1,164 @@
-#  LokVeda — Digital E-Gram Panchayat System
+# LokVeda — Digital E-Gram Panchayat System
 
-LokVeda is a full-stack E-Gram Panchayat Management System designed to digitize village-level governance and citizen services while maintaining security, accessibility, and ease of use for non-technical users.
+LokVeda is a full-stack E-Gram Panchayat project developed to make common Panchayat services available through a simple web application.
 
-The platform provides secure authentication, role-based service workflows, application review pipelines, area-wise service management, and citizen-centric service delivery through a modern web interface.
+The main idea of LokVeda is to provide a digital platform where citizens can apply for different government services, track their applications, and correct and resubmit rejected applications. Staff members can review applications, while administrators can manage services and approve applications.
 
 ---
 
+## Project Overview
 
+LokVeda works like a basic online Panchayat service portal.
 
-##  Project Overview
-
-LokVeda simulates a real-world Panchayat service portal where citizens can:
+Citizens can:
 
 * Apply for government services
-* Track application status
-* Re-submit rejected applications
-* View approved services
-* Access services available in their area
+* Check application status
+* Correct and resubmit rejected applications
+* View their profile
+* See services available in their area
 
-Staff members review applications and forward valid requests to administrators.
+Staff members can review applications and forward valid applications to administrators.
 
-Administrators manage services, approve applications, and oversee Panchayat operations.
-
----
-
-##  User Roles
-
-###  Citizen
-
-* Login using Aadhaar number and OTP
-* Apply for active services
-* View application status
-* Re-submit rejected applications
-* View profile information
-
-###  Staff
-
-* Review citizen applications
-* Reject incomplete applications
-* Forward valid applications to administrators
-* Review previously rejected applications
-
-###  Administrator
-
-* Activate or deactivate services
-* Approve reviewed applications
-* Review rejected applications
-* View approved applications
-* Monitor service availability within their Panchayat
+Administrators can manage services, approve applications, and monitor applications for their Panchayat area.
 
 ---
 
-##  Core Features
-
-###  Secure Authentication
-
-* Aadhaar-based login
-* Email OTP verification
-* Crypto-generated OTP codes
-* Hashed OTP storage using bcrypt
-* JWT-based authentication
-* Session token management
-* Single active session per account
-
-###  Location Verification
-
-LokVeda performs geographic verification before OTP generation.
-
-* Citizens: Allowed within registered states
-* Staff: Allowed within 10 km of assigned area
-* Administrators: Allowed within 250 km of assigned area
-
-Location distance is displayed using user-friendly messages.
-
-###  Security Controls
-
-* Maximum login attempt protection
-* Suspicious login detection
-* Session validation
-* Device tracking
-* IP logging
-* Location tracking
-* Account lock mechanisms
-
-###  Session Management
-
-* Auth token during login
-* Session token after verification
-* Automatic session expiry
-* Secure logout handling
-* Protection against duplicate sessions
-
-###  Dark Mode
-
-* Automatic browser preference detection
-* Local preference persistence
-* Smooth transitions
-* Available throughout the application
-
-###  Greeting System
-
-Dynamic greeting messages based on:
-
-* User name
-* Time of day
-* Sunrise and sunset calculations
-
----
-
-##  Application Workflow
+## User Roles
 
 ### Citizen
 
+* Login using Aadhaar number and OTP
+* Apply for available services
+* Check application status
+* Resubmit rejected applications
+* View profile information
+
+### Staff
+
+* View and review citizen applications
+* Reject incomplete applications
+* Forward valid applications to administrators
+* Check previously rejected applications
+
+### Administrator
+
+* Activate or deactivate services
+* Approve applications reviewed by staff
+* View rejected applications
+* View approved applications
+* Manage services according to Panchayat areas
+
+---
+
+## Main Features
+
+### Login and Authentication
+
+LokVeda uses several security features for login:
+
+* Aadhaar-based login
+* Email OTP verification
+* Random OTP generation using crypto
+* bcrypt for storing OTP securely
+* JWT authentication
+* Session token management
+* One active session for an account
+
+### Location Verification
+
+Before generating an OTP, the system checks the user's location.
+
+* **Citizens:** Allowed within their registered state
+* **Staff:** Must be within 10 km of their assigned area
+* **Administrators:** Must be within 250 km of their assigned area
+
+The distance is also shown to the user through simple messages.
+
+### Security Features
+
+The project includes:
+
+* Maximum login attempt limit
+* Suspicious login detection
+* Session checking
+* Device tracking
+* IP logging
+* Location tracking
+* Account locking
+
+### Session Management
+
+* Authentication token during login
+* Session token after OTP verification
+* Automatic session expiry
+* Logout handling
+* Prevention of multiple active sessions
+
+### Dark Mode
+
+The website also supports dark mode.
+
+* Detects the browser's preferred theme
+* Saves the user's theme preference
+* Works throughout the application
+* Includes smooth theme changes
+
+### Greeting System
+
+The dashboard shows different greetings depending on:
+
+* User's name
+* Current time
+* Sunrise and sunset time
+
+---
+
+## Application Workflow
+
+### Citizen Application
+
+```text
 Application Submitted
-
-↓
-
+        ↓
 Pending Review
-
-↓
-
+        ↓
 Reviewed by Staff
-
-↓
-
+        ↓
 Approved by Admin
+```
 
----
+### Rejection and Resubmission
 
-### Rejection Flow
-
+```text
 Application Submitted
-
-↓
-
+        ↓
 Rejected
-
-↓
-
+        ↓
 Citizen Corrects Application
-
-↓
-
-Re-submitted
-
-↓
-
+        ↓
+Application Resubmitted
+        ↓
 Review Process Continues
+```
 
 ---
 
-##  Service Management
+## Service Management
 
-Administrators can activate or deactivate services independently for each Panchayat area.
+Administrators can turn individual services on or off for different Panchayat areas.
 
-Citizens only see:
+Citizens can only see services that are currently active in their area.
 
-* Active services
-* Rejected applications eligible for correction
+Services that already have pending, reviewed, or approved applications are not shown again on the application page.
 
-Applications already pending, reviewed, or approved are hidden from the service application page.
+Rejected applications that can be corrected and resubmitted are also shown to the citizen.
 
 ---
 
-##  Available Services
+## Available Services
+
+The project includes services such as:
 
 * Birth Certificate
 * Death Certificate
@@ -192,7 +187,7 @@ Applications already pending, reviewed, or approved are hidden from the service 
 
 ## Forms Supported
 
-The system currently supports 22 government services:
+LokVeda currently has forms for 22 different government services:
 
 * Birth Certificate
 * Death Certificate
@@ -219,78 +214,87 @@ The system currently supports 22 government services:
 
 ---
 
-## Architecture Overview
+## Basic Architecture
+
+The project follows a simple flow:
 
 ```text
-Client Browser
-      │
-      ▼
- Express Routes
-      │
-      ▼
- Controllers
-      │
-      ▼
- Middleware
-      │
-      ▼
- Mongoose Models
-      │
-      ▼
- MongoDB Database
+User Browser
+     │
+     ▼
+Express Routes
+     │
+     ▼
+Controllers
+     │
+     ▼
+Middleware
+     │
+     ▼
+Mongoose Models
+     │
+     ▼
+MongoDB
 ```
 
-### Security Layers
+### Security Flow
 
-1. Aadhaar Validation
-2. Location Verification
-3. OTP Verification
-4. JWT Authentication
-5. Session Validation
-6. Role-Based Authorization
-7. Service Access Control
-8. Account Locking Protection
+The main security checks are:
+
+1. Aadhaar validation
+2. Location checking
+3. OTP verification
+4. JWT authentication
+5. Session validation
+6. Role checking
+7. Service access checking
+8. Account lock protection
 
 ---
 
-## Core Modules
+## Main Modules
 
-### Authentication Module
+### Authentication
 
-* Aadhaar Verification
-* Email OTP Verification
-* JWT Authentication
-* Device Session Tracking
-* Suspicious Login Detection
+* Aadhaar verification
+* Email OTP verification
+* JWT authentication
+* Device/session tracking
+* Suspicious login detection
 
 ### Service Module
 
-* Dynamic Form Rendering
-* Application Submission
-* Application Review
-* Application Approval
-* Application Rejection
+* Service forms
+* Application submission
+* Application review
+* Application approval
+* Application rejection
 
-### Administration Module
+### Administration
 
-* Service Activation
-* Service Deactivation
-* Area-wise Management
-* Application Approval Workflow
+* Activate services
+* Deactivate services
+* Manage services according to area
+* Approve applications
 
-### Dashboard Module
+### Dashboards
 
-* Citizen Dashboard
-* Staff Dashboard
-* Admin Dashboard
+Different dashboards are available for:
 
-### UI Module
+* Citizens
+* Staff
+* Administrators
 
-* Dark Mode
-* Responsive Design
-* Dynamic Navigation
-* Friendly Status Messaging
-* Area-aware Footer
+### UI
+
+The interface includes:
+
+* Dark mode
+* Responsive design
+* Dynamic navigation
+* Simple status messages
+* Area-based service display
+* Area-aware footer
 
 ---
 
@@ -320,20 +324,20 @@ Client Browser
 * crypto
 * validator
 
-### Communication
+### Email
 
 * Nodemailer
 
-###  Deployment Infrastructure
+### Deployment
 
-* Render — Application hosting and deployment platform used for running the Node.js and Express.js server in a cloud environment.
-* Cloudflare (Planned / Future Integration) — Intended for DNS management, performance optimization, SSL enhancement, caching, and protection against automated bots and malicious traffic.
+* **Render** — Used to host and run the Node.js/Express application.
+* **Cloudflare** — Planned for future use for DNS, caching, CDN, SSL improvements, and basic traffic/bot protection.
 
 ---
 
-##  Architecture
+## Project Structure
 
-LokVeda follows the MVC (Model-View-Controller) architecture.
+LokVeda follows the MVC (Model-View-Controller) pattern.
 
 ### Models
 
@@ -366,54 +370,64 @@ LokVeda follows the MVC (Model-View-Controller) architecture.
 
 ---
 
-##  User Experience Highlights
+## User Experience
 
-* Friendly status messages
-* Responsive layouts
-* Area-aware service visibility
-* Rejected form auto-fill
-* Consistent navigation system
-* Accessible visual hierarchy
-* Low learning curve for rural users
+Some features added to make the website easier to use are:
 
----
-
-##  Current Limitations
-
-* File uploads not implemented
-* PDF generation not implemented
-* Document downloads not implemented
-* Search functionality postponed
-* Notifications not implemented
-* Analytics dashboard not implemented
+* Simple status messages
+* Responsive pages
+* Services based on user's area
+* Automatic filling of rejected applications
+* Consistent navigation
+* Simple and clean interface
+* Easy-to-understand workflow for users who may not be very familiar with technology
 
 ---
 
-##  Future Scope
+## Current Limitations
+
+Some features are not implemented yet:
+
+* File uploads
+* PDF generation
+* Document downloads
+* Search functionality
+* Notifications
+* Analytics dashboard
+
+---
+
+## Future Improvements
+
+Some features planned for future versions are:
 
 * File upload support
 * PDF generation
 * Digital document downloads
 * SMS notifications
-* Advanced analytics
+* Analytics and reports
 * Search and filtering
-* Multi-language support
+* Multiple language support
 * Mobile application
-* Profile images currently use demonstration avatars stored locally within the application. User-uploaded profile images and cloud-based media storage are planned for future releases
-* Custom domain integration through Cloudflare
-* Enhanced security using Cloudflare bot protection and traffic filtering
-* Global content delivery optimization through Cloudflare CDN
+* User-uploaded profile pictures
+* Cloud storage for profile images
+* Custom domain using Cloudflare
+* Cloudflare bot protection and traffic filtering
+* CDN support for faster content delivery
+
+Currently, profile pictures use sample avatars stored locally in the project.
 
 ---
 
-##  Developer
+## Developer
 
 **Sayan Goswami**
-System Architect, Backend Developer
-
+System Architect & Backend Developer
 
 ---
 
-##  Academic Note
+## Academic Project
 
-LokVeda was developed as an academic project demonstrating secure authentication, role-based access control, workflow management, session security, and digital governance concepts in a Panchayat-level service delivery system.
+LokVeda was developed as an academic project to understand and implement concepts such as authentication, role-based access, application workflows, session management, security, and digital governance.
+
+The project is mainly focused on creating a simple example of how Panchayat-level services can be moved from a traditional process to an online platform.
