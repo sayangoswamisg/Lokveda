@@ -1,4 +1,4 @@
-# 🌿 LokVeda — Digital E-Gram Panchayat System
+#  LokVeda — Digital E-Gram Panchayat System
 
 LokVeda is a full-stack E-Gram Panchayat Management System designed to digitize village-level governance and citizen services while maintaining security, accessibility, and ease of use for non-technical users.
 
@@ -6,23 +6,9 @@ The platform provides secure authentication, role-based service workflows, appli
 
 ---
 
-## 🚀 Version
 
-Current Version: **v2.0.0**
 
-LokVeda v2.0.0 is a complete rewrite of the original Firebase prototype and introduces a full backend architecture with authentication, authorization, workflow management, and administrative controls.
-
-### [Live Demo](https://lokveda.onrender.com)
-
-If link doesn't work click here: <https://lokveda.onrender.com>
-
-### [Source Code](https://github.com/dipsana/lokveda)
-
-If link doesn't work click here: <https://github.com/dipsana/lokveda>
-
----
-
-## 🏛️ Project Overview
+##  Project Overview
 
 LokVeda simulates a real-world Panchayat service portal where citizens can:
 
@@ -38,9 +24,9 @@ Administrators manage services, approve applications, and oversee Panchayat oper
 
 ---
 
-## 👥 User Roles
+##  User Roles
 
-### 👤 Citizen
+###  Citizen
 
 * Login using Aadhaar number and OTP
 * Apply for active services
@@ -48,14 +34,14 @@ Administrators manage services, approve applications, and oversee Panchayat oper
 * Re-submit rejected applications
 * View profile information
 
-### 🧑‍💼 Staff
+###  Staff
 
 * Review citizen applications
 * Reject incomplete applications
 * Forward valid applications to administrators
 * Review previously rejected applications
 
-### 🛡️ Administrator
+###  Administrator
 
 * Activate or deactivate services
 * Approve reviewed applications
@@ -65,9 +51,9 @@ Administrators manage services, approve applications, and oversee Panchayat oper
 
 ---
 
-## ✨ Core Features
+##  Core Features
 
-### 🔐 Secure Authentication
+###  Secure Authentication
 
 * Aadhaar-based login
 * Email OTP verification
@@ -77,7 +63,7 @@ Administrators manage services, approve applications, and oversee Panchayat oper
 * Session token management
 * Single active session per account
 
-### 🌍 Location Verification
+###  Location Verification
 
 LokVeda performs geographic verification before OTP generation.
 
@@ -87,7 +73,7 @@ LokVeda performs geographic verification before OTP generation.
 
 Location distance is displayed using user-friendly messages.
 
-### 🛡️ Security Controls
+###  Security Controls
 
 * Maximum login attempt protection
 * Suspicious login detection
@@ -97,7 +83,7 @@ Location distance is displayed using user-friendly messages.
 * Location tracking
 * Account lock mechanisms
 
-### ⏳ Session Management
+###  Session Management
 
 * Auth token during login
 * Session token after verification
@@ -105,14 +91,14 @@ Location distance is displayed using user-friendly messages.
 * Secure logout handling
 * Protection against duplicate sessions
 
-### 🌙 Dark Mode
+###  Dark Mode
 
 * Automatic browser preference detection
 * Local preference persistence
 * Smooth transitions
 * Available throughout the application
 
-### 🤖 Greeting System
+###  Greeting System
 
 Dynamic greeting messages based on:
 
@@ -122,7 +108,7 @@ Dynamic greeting messages based on:
 
 ---
 
-## 📋 Application Workflow
+##  Application Workflow
 
 ### Citizen
 
@@ -164,7 +150,7 @@ Review Process Continues
 
 ---
 
-## 🧩 Service Management
+##  Service Management
 
 Administrators can activate or deactivate services independently for each Panchayat area.
 
@@ -177,7 +163,7 @@ Applications already pending, reviewed, or approved are hidden from the service 
 
 ---
 
-## 📄 Available Services
+##  Available Services
 
 * Birth Certificate
 * Death Certificate
@@ -201,97 +187,6 @@ Applications already pending, reviewed, or approved are hidden from the service 
 * Voter List Services
 * Tenders
 * Government Dues
-
----
-
-## 📁 Project Structure — LokVeda v2.0.0
-
-[lokveda/](/)  
-│  
-├── 📁 [controllers/](./controllers/)  
-│   ├── [auth.controller.js](./controllers/auth.controller.js)  
-│   ├── [dashboard.controller.js](./controllers/dashboard.controller.js)  
-│   └── [service.controller.js](./controllers/service.controller.js)  
-│  
-├── 📁 [middleware/](./middleware/)  
-│   └── [auth.middleware.js](./middleware/auth.middleware.js)  
-│  
-├── 📁 [models/](./models/)  
-│   ├── [area.model.js](./models/area.model.js)  
-│   ├── [polygon.model.js](./models/polygon.model.js)  
-│   ├── [service.model.js](./models/service.model.js)  
-│   └── [user.model.js](./models/user.model.js)  
-│  
-├── 📁 [routes/](./routes/)  
-│   ├── [admin.route.js](./routes/admin.route.js)  
-│   ├── [citizen.route.js](./routes/citizen.route.js)  
-│   ├── [global.route.js](./routes/global.route.js)  
-│   └── [staff.route.js](./routes/staff.route.js)  
-│  
-├── 📁 [public/](./public/)  
-│   │  
-│   ├── 📁 [css/](./public/css/)  
-│   │   ├── [auth.css](./public/css/auth.css)  
-│   │   ├── [dashboard.css](./public/css/dashboard.css)  
-│   │   ├── [home.css](./public/css/home.css)  
-│   │   ├── [profile.css](./public/css/profile.css)  
-│   │   ├── [style-global.css](./public/css/style-global.css)  
-│   │   ├── [utilities.css](./public/css/utilities.css)  
-│   │   └── [📁 services/](./public/css/services/)  
-│   │  
-│   ├── 📁 [js/](./public/js/)  
-│   │   ├── [auth.js](./public/js/auth.js)  
-│   │   └── [script-global.js](./public/js/script-global.js)  
-│   │  
-│   ├── 📁 [images/](./public/images/)  
-│   │   ├── 📁 [background/](./public/images/backgrounds/)  
-│   │   │   ├── [lokveda-dark.png](./public/images/backgrounds/lokveda-dark.png)  
-│   │   │   └── [lokveda-light.png](./public/images/backgrounds/lokveda-light.png)  
-│   │   │  
-│   │   ├── 📁 [icons/](./public/images/)  
-│   │   ├── 📁 [services/](./public/images/services/)  
-│   │   │  
-│   │   ├── [default-avatar.png](./public/images/default-avatar.png)  
-│   │   ├── [default-service.jpg](./public/images/default-service.jpg)  
-│   │   ├── [favicon.png](./public/images/favicon.png)  
-│   │   └── [preview.png](./public/images/preview.png)  
-│   │  
-│   └── 📁 [uploads/](./public/uploads/)  
-│       └── 📁 [profile-pics/](./public/uploads/profile-pics/)  
-│  
-├── 📁 [views/](./views/)  
-│   │  
-│   ├── 📁 [partials/](./views/partials/)  
-│   │   ├── [header.ejs](./views/partials/header.ejs)  
-│   │   ├── [nav.ejs](./views/partials/nav.ejs)  
-│   │   ├── [footer.ejs](./views/partials/footer.ejs)  
-│   │   └── 📁 [forms/](./views/partials/forms/)  
-│   │  
-│   ├── 📁 [services/](./views/services/)  
-│   │   ├── [applications.ejs](./views/services/applications.ejs)  
-│   │   ├── [apply.ejs](./views/services/apply.ejs)  
-│   │   ├── [create.ejs](./views/services/create.ejs)  
-│   │   ├── [menu.ejs](./views/services/menu.ejs)  
-│   │   ├── [status.ejs](./views/services/status.ejs)  
-│   │   ├── [update.ejs](./views/services/update.ejs)  
-│   │   └── [view.ejs](./views/services/view.ejs)  
-│   │  
-│   ├── [auth.ejs](./views/auth.ejs)  
-│   ├── [dashboard.ejs](./views/dashboard.ejs)  
-│   ├── [home.ejs](./views/home.ejs)  
-│   └── [profile.ejs](./views/profile.ejs)  
-│  
-├── 📁 [documentation/](./documentation/)  
-│  
-├── [index.js](./index.js)  
-│  
-├── [.gitignore](./.gitignore)  
-├── [CHANGELOG.md](./CHANGELOG.md)  
-├── [LICENSE](./LICENSE)  
-├── [README.md](./README.md)  
-├── [SECURITY.md](./SECURITY.md)  
-├── [package-lock.json](./package-lock.json)  
-└── [package.json](./package.json)
 
 ---
 
@@ -429,14 +324,14 @@ Client Browser
 
 * Nodemailer
 
-### 🏃‍♂️‍➡️ Deployment Infrastructure
+###  Deployment Infrastructure
 
 * Render — Application hosting and deployment platform used for running the Node.js and Express.js server in a cloud environment.
 * Cloudflare (Planned / Future Integration) — Intended for DNS management, performance optimization, SSL enhancement, caching, and protection against automated bots and malicious traffic.
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 LokVeda follows the MVC (Model-View-Controller) architecture.
 
@@ -471,7 +366,7 @@ LokVeda follows the MVC (Model-View-Controller) architecture.
 
 ---
 
-## 🎨 User Experience Highlights
+##  User Experience Highlights
 
 * Friendly status messages
 * Responsive layouts
@@ -483,7 +378,7 @@ LokVeda follows the MVC (Model-View-Controller) architecture.
 
 ---
 
-## ⚠️ Current Limitations
+##  Current Limitations
 
 * File uploads not implemented
 * PDF generation not implemented
@@ -494,7 +389,7 @@ LokVeda follows the MVC (Model-View-Controller) architecture.
 
 ---
 
-## 🔮 Future Scope
+##  Future Scope
 
 * File upload support
 * PDF generation
@@ -511,13 +406,13 @@ LokVeda follows the MVC (Model-View-Controller) architecture.
 
 ---
 
-## 📜 License
+##  License
 
 This project is licensed under the MIT License.
 
 ---
 
-## 👨‍💻 Developer
+##  Developer
 
 **Dipsana Roy**
 
@@ -529,6 +424,6 @@ System Architect, Backend Developer
 
 ---
 
-## 📌 Academic Note
+##  Academic Note
 
 LokVeda was developed as an academic project demonstrating secure authentication, role-based access control, workflow management, session security, and digital governance concepts in a Panchayat-level service delivery system.
