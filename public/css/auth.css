@@ -1,0 +1,68 @@
+/* css/auth.css */
+
+* {
+    box-sizing: border-box;
+}
+
+.auth-card {
+    background: var(--primaryColor);
+    color: var(--textColor);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0px 20px 0px rgba(135, 207, 235, .9);
+    width: 80%;
+    max-width: 400px;
+}
+
+h1 {
+    margin-bottom: 1.5rem;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 1.2rem;
+}
+
+.input-group label {
+    font-size: .9rem;
+    margin-bottom: .4rem;
+    display: block;
+}
+
+.input-group input {
+    width: 100%;
+    padding: .7rem;
+    border-radius: .5rem;
+    font-size: 1rem;
+    border: none;
+}
+
+.btn-group button {
+    width: 100%;
+    padding: .8rem;
+    margin-top: .5rem;
+    background-color: #007bffd6;
+}
+
+.btn-group button:hover {
+    background-color: #0057b3d7;
+}
+
+.status-message {
+    margin-top: 1rem;
+    color: rgb(0, 151, 0);
+    font-size: .9rem;
+}
+
+.status-message.pink {
+    color: rgb(190, 0, 219);
+}
+
+.hidden {
+    display: none;
+}
+
+#resend-otp-btn {
+    opacity: .65;
+    margin: .4rem auto
+}

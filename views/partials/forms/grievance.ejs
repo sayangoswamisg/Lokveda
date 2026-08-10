@@ -1,0 +1,37 @@
+<label>
+    Complainant Name:
+    <input type="text" name="name" required>
+</label>
+
+<label>
+    Contact Email:
+    <input type="email" name="email" required>
+</label>
+
+<label>
+    Mobile Number:
+    <input type="tel" name="mobile" pattern="[0-9]{10}" required>
+</label>
+
+<label>
+    Type of Complaint:
+    <select name="complaintType" required>
+        <option value="">--Select--</option>
+        <option value="service">Service Delay</option>
+        <option value="corruption">Corruption</option>
+        <option value="behavior">Staff Misbehavior</option>
+        <option value="infrastructure">Infrastructure Issue</option>
+        <option value="other">Other</option>
+    </select>
+</label>
+
+<label>
+    Complaint Details:
+    <textarea name="details" rows="4" required></textarea>
+</label>
+
+<label>
+    Upload Evidence (if any):
+    <!-- accept=".pdf,.jpg,.jpeg,.png" -->
+    <input type="file" name="evidence">
+</label>

@@ -1,0 +1,58 @@
+<%- include('partials/header') %>
+
+<% const config = {
+    citizen: { title: [] },
+    staff: {
+        title: [
+            '🛠️ Review Applications',
+            '👎 Review Rejected Applications'
+        ],
+        desc: [
+            `Review and forward citizen applications to the administrator`,
+            `Revisit and manage previously rejected applications`
+        ],
+        link: [
+            'applications/pending',
+            'applications/rejected'
+        ]
+    },
+    admin: {
+        title: [
+            '🧑‍💼 Manage Services / Schemes',
+            '📋 Approve Applications',
+            '👎 Review Rejected Applications',
+            '✅ View Approved Applications'
+        ],
+        desc: [
+            `Launch, update, or deactivate services and welfare schemes of ${_user.areaRef.name}`,
+            `Oversee and approve reviewed applications`,
+            `Review and manage previously rejected applications`,
+            `Browse approved applications`
+        ],
+        link: [
+            'services/update',
+            'applications/reviewed',
+            'applications/rejected',
+            'applications/approved'
+        ]
+    }
+}; %>
+
+<main class="dashboard">
+    <div class="card" onclick="window.location.href='/services/apply'">
+        📝 Apply Services<p>Apply for available government schemes and documents</p>
+    </div>
+    <div class="card" onclick="window.location.href='/services/status'">
+        ✅ My Application Status<p>Check the progress and updates on your service requests</p>
+    </div>
+<% for (let i = 0; i < config[_role].title.length; i++) { %>
+    <div class="card" onclick="window.location.href='/<%= _role %>/<%= config[_role].link[i] %>'">
+        <%= config[_role].title[i] %><p><%= config[_role].desc[i] %></p>
+    </div>
+<% } %>
+    <div class="card" onclick="window.location.href='/profile'">
+        🏃‍➡️ My Profile<p>View and manage your personal information securely</p>
+    </div>
+</main>
+
+<%- include('partials/footer') %>

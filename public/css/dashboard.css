@@ -1,0 +1,65 @@
+/* css/dashboard.css */
+
+/* Card Container */
+.dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: space-around;
+    padding: 2rem;
+}
+
+/* Cards */
+.dashboard .card {
+    width: clamp(350px, 30vw, 80vw);
+    min-height: 120px;
+    background: var(--card-color, #f0f0f0);
+    border-radius: 1rem;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.dashboard .card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0px 20px 0px var(--card-color);
+}
+
+.dashboard .card p {
+    font-size: 1.2rem;
+}
+
+.card:nth-child(1) {
+    --card-color: #4caf4fe7;
+}
+
+.card:nth-child(2) {
+    --card-color: #2195f3e6;
+}
+
+.card:nth-child(3) {
+    --card-color: #9b27b0eb;
+}
+
+.card:nth-child(4) {
+    --card-color: #b0ae27eb;
+}
+
+.card:nth-child(5) {
+    --card-color: #27b07be7;
+}
+
+.card:nth-child(6) {
+    --card-color: #ee9aebe7;
+}
+
+.card:nth-child(7) {
+    --card-color: #cf925ae7;
+}

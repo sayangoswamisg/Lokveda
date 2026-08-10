@@ -1,0 +1,66 @@
+<%- include('../partials/header') %>
+
+<% const serviceName = _form.id
+    ? _form.id
+        .replaceAll('-', ' ')
+        .replace(/\b\w/g, char => char.toUpperCase())
+    : 'All';
+
+    let isAbsent = true;
+%>
+
+<main class="<%= _page %>">
+
+    <h1><%= _page.charAt(0).toUpperCase() + _page.slice(1) %> <%= serviceName %> Applications</h1>
+
+<% _applicants.forEach(_applicant => { isAbsent = false; %>
+    <article class="application-card">
+
+        <img src="/uploads/profile-pics/<%= _applicant.pic %>" alt="Profile Picture" onerror="this.onerror=null; this.src='/images/default-avatar.png'">
+        <div class="details">
+            <h3 title="<%= _applicant.name %>">Name: <%= _applicant.name %></h3>
+            <small> Applicant ID: <%= _applicant.id %></small>
+        </div>
+        
+        <div class="btn-grp">
+            <button onclick="window.location.href='/<%= _role %>/profile/<%= _form.id %>/<%= _applicant.id %>'">View Profile 👤</button>
+            <button onclick="window.location.href='/<%= _role %>/application/<%= _form.id %>/<%= _applicant.id %>'">View Application 📄</button>
+        </div>
+            
+        <div class="meta">
+            <% if (_applicant.reviewedBy) { %>
+                <small><i>Reviewed by: <%= _applicant.reviewedBy %></i></small>
+            <% } %>
+            <% if (_applicant.approvedBy) { %>
+                <small><i>Approved by: <%= _applicant.approvedBy %></i></small>
+            <% } %>
+            <% if (_applicant.rejectedBy) { %>
+                <small><i>Rejected by: <%= _applicant.rejectedBy %></i></small>
+            <% } %>
+        </div>
+
+        <div class="meta">
+            <% if (_applicant.reviewedAt) { %>
+                <small><i>Reviewed at: <%= _applicant.reviewedAt %></i></small>
+            <% } %>
+            <% if (_applicant.approvedAt) { %>
+                <small><i>Approved at: <%= _applicant.approvedAt %></i></small>
+            <% } %>
+            <% if (_applicant.rejectedAt) { %>
+                <small><i>Rejected at: <%= _applicant.rejectedAt %></i></small>
+            <% } %>
+        </div>
+
+    </article>
+
+<% }); if (isAbsent) { %>
+    <h2>Phew! No applications to display...😮‍💨</h2>
+<% } %>
+
+    <!-- Navigation -->
+    <div class="btn-grp">
+        <button onclick="window.location.href='/<%= _role %>/dashboard'">[← Dashboard</button>
+    </div>
+</main>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,78 @@
+<%- include('../partials/header') %>
+
+<main>
+    <h1>Tap on a service to toggle it's state</h1>
+    <section class="active">
+        <h2>Active Services</h2>
+        <div class="services-grid">
+        <% let noActive = true;
+        for (const service of _user.areaRef.activeServices) { noActive = false; %>
+            <div class="service-card" onclick="deactivateService('<%= service %>');">
+                <img src="/images/services/<%= service %>.avif" onerror="this.onerror=null; this.src='default-service.jpg'" alt="<%= config[service] %>">
+                <p class="service-title"><%= config[service] %></p>
+            </div>
+        <% } %>
+        </div>
+    <% if (noActive) { %>
+        <h2>Okay, let's try by activating one service...😉</h2>
+    <% } %>
+    </section>
+    <section>
+        <h2>Inactive Services</h2>
+        <div class="services-grid">
+        <% noActive = true;
+        for (const service of _user.areaRef.inactiveServices) { noActive = false; %>
+            <div class="service-card" onclick="activateService('<%= service %>');">
+                <img src="/images/services/<%= service %>.avif" onerror="this.onerror=null; this.src='default-service.jpg'" alt="<%= config[service] %>">
+                <p class="service-title"><%= config[service] %></p>
+            </div>
+        <% } %>
+        </div>
+    <% if (noActive) { %>
+        <h2>Wow! All the services are currently active 🤩</h2>
+    <% } %>
+    </section>
+
+    <!-- Navigation -->
+    <div class="btn-grp">
+        <button onclick="window.location.href='/<%= _role %>/dashboard'">[← Dashboard</button>
+    </div>
+</main>
+
+<script>
+    const sections = document.querySelectorAll('main > section');
+
+    async function activateService(serviceID) {
+        // Disable sections to avoid multiple clicks
+        sections.forEach(section => section.classList.add('disabled'));
+
+        // Fetch to activate service
+        const res = await fetch(`/admin/service/activate/${serviceID}`, { method: 'POST' });
+
+        // Fresh the page if activated, else stay and display error
+        if (res.ok) location.reload();
+        else {
+            const data = await res.json();
+            errorModal('Unable to activate service 😕', data.errors);
+            sections.forEach(section => section.classList.remove('disabled'));
+        }
+    }
+    
+    async function deactivateService(serviceID) {
+        // Disable sections to avoid multiple clicks
+        sections.forEach(section => section.classList.add('disabled'));
+
+        // Fetch to deactivate service
+        const res = await fetch(`/admin/service/deactivate/${serviceID}`, { method: 'POST' });
+
+        // Fresh the page if deactivated, else stay and display error
+        if (res.ok) location.reload();
+        else {
+            const data = await res.json();
+            errorModal('Unable to deactivate service 😕', data.errors);
+            sections.forEach(section => section.classList.remove('disabled'));
+        }
+    }
+</script>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,71 @@
+<%- include('../partials/header') %>
+
+<main>
+    <section>
+        <h2>Rejected Services</h2>
+        <div class="services-grid">
+        <% const services = _user.services; let noActive = true;
+        for (const rejectedService of services.rejected) { noActive = false; %>
+            <div class="service-card" onclick="window.location.href='/services/apply/<%= rejectedService %>'">
+                <img src="/images/services/<%= rejectedService %>.avif" onerror="this.onerror=null; this.src='default-service.jpg'" alt="<%= config[rejectedService] %>">
+                <p class="service-title"><%= config[rejectedService] %></p>
+            </div>
+        <% } %>
+        </div>
+    <% if (noActive) { %>
+        <h2>Phew! Nothing here...😮‍💨</h2>
+    <% } %>
+    </section>
+    <section class="pending">
+        <h2>Pending Services</h2>
+        <div class="services-grid">
+        <% noActive = true;
+        for (const pendingService of services.pending) { noActive = false; %>
+            <div class="service-card" onclick="window.location.href='/services/view/<%= pendingService %>'">
+                <img src="/images/services/<%= pendingService %>.avif" onerror="this.onerror=null; this.src='default-service.jpg'" alt="<%= config[pendingService] %>">
+                <p class="service-title"><%= config[pendingService] %></p>
+            </div>
+        <% } %>
+        </div>
+    <% if (noActive) { %>
+        <h2>Wo-hoh! Nothing is pending...😎</h2>
+    <% } %>
+    </section>
+    <section class="reviewed">
+        <h2>Reviewed Services</h2>
+        <div class="services-grid">
+        <% noActive = true;
+        for (const reviewedService of services.reviewed) { noActive= false; %>
+            <div class="service-card" onclick="window.location.href='/services/view/<%= reviewedService %>'">
+                <img src="/images/services/<%= reviewedService %>.avif" onerror="this.onerror=null; this.src='default-service.jpg'" alt="<%= config[reviewedService] %>">
+                <p class="service-title"><%= config[reviewedService] %></p>
+            </div>
+        <% } %>
+        </div>
+    <% if (noActive) { %>
+        <h2>Everything is reviewed for now...🏃‍♂️‍➡️</h2>
+    <% } %>
+    </section>
+    <section class="active">
+        <h2>Approved Services</h2>
+        <div class="services-grid">
+        <% noActive = true;
+        for (const approvedService of services.approved) { noActive = false; %>
+            <div class="service-card" onclick="window.location.href='/services/view/<%= approvedService %>'">
+                <img src="/images/services/<%= approvedService %>.avif" onerror="this.onerror=null; this.src='default-service.jpg'" alt="<%= config[approvedService] %>">
+                <p class="service-title"><%= config[approvedService] %></p>
+            </div>
+        <% } %>
+        </div>
+    <% if (noActive) { %>
+        <h2>Currently, you don't have any approved services...🤷‍♀️</h2>
+    <% } %>
+    </section>
+
+    <!-- Navigation -->
+    <div class="btn-grp">
+        <button onclick="window.location.href='/<%= _role %>/dashboard'">[← Dashboard</button>
+    </div>
+</main>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,101 @@
+/* css/services/applications.css */
+
+/* Parent Container */
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    width: 80vw;
+}
+
+main h2 {
+    margin-bottom: 1rem;
+}
+
+/* Parent Container: Background, Headings & Borders */
+main.rejected {
+    background: #c440d53d;
+    border: 1px solid deeppink;
+    --cardHover: #d443e7a8;
+}
+
+main.approved {
+    background: #b1df6b2b;
+    border: 1px solid green;
+    --cardHover: #a6e743a8;
+}
+
+main.pending {
+    background: #ffff0029;
+    border: 1px solid yellow;
+    --cardHover: #ffff0070;
+}
+
+main.reviewed {
+    background: #0000ff24;
+    border: 1px solid blue;
+    --cardHover: #0000ff82;
+}
+
+/* Cards */
+.application-card {
+    margin: auto;
+    width: 92%;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255,255,255,.2);
+    backdrop-filter: blur(2px);
+    transition: .2s ease;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: space-evenly;
+    justify-content: space-between;
+}
+
+.application-card:hover {
+    background: var(--cardHover);
+    transform: translateY(-2px);
+}
+
+/* Card details */
+.application-card img {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.details {
+    align-self: center;
+    text-align: left;
+    min-width: 20%;
+    flex: 1;
+}
+
+.details h3, .meta {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.actions {
+    display: flex;
+    gap: .75rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.meta {
+    margin-top: .75rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 1rem;
+    opacity: .8;
+    color: rgb(83, 178, 237);
+}

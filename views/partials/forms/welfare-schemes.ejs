@@ -1,0 +1,31 @@
+<label>
+    Applicant Name:
+    <input type="text" name="applicantName" required>
+</label>
+
+<label>
+    Aadhaar Number:
+    <input type="text" name="aadhaarNumber" maxlength="12" required>
+</label>
+
+<label>
+    Scheme Name:
+    <select name="schemeName" required>
+        <option value="">--Select--</option>
+        <option value="oldage">Old Age Pension</option>
+        <option value="widow">Widow Pension</option>
+        <option value="disability">Disability Benefit</option>
+        <option value="others">Other Schemes</option>
+    </select>
+</label>
+
+<label>
+    Income Certificate Number:
+    <input type="text" name="incomeCert" required>
+</label>
+
+<label>
+    Upload Supporting Documents:
+     <!-- multiple -->
+    <input type="file" name="documents">
+</label>

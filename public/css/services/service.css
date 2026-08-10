@@ -1,0 +1,86 @@
+/* css/services/service.css */
+
+/* Parent container */
+main {
+    border: var(--border);
+    border-radius: 2rem;
+    padding: 5vmin;
+    background: var(--bg);
+}
+
+/* Heading */
+main h1 {
+    margin-bottom: 3vh;
+}
+
+/* Form + elements */
+main form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 10vw;
+    text-align: left;
+}
+
+main form label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 400px;
+}
+
+main form textarea,
+main form input,
+main form select {
+    padding: 2.5%;
+    background-color: var(--primaryColor);
+    color: var(--textColor);
+    border: 1px solid cornflowerblue;
+    border-radius: 2px;
+    margin: 2vh 0;
+}
+
+main form button {
+    display: block;
+}
+
+/* Reject Btn */
+#reject {
+    background: #d443e7;
+}
+
+#reject:hover {
+    background: #d443e7cc;
+}
+
+@media (max-width:748px) {
+    main h1 {
+        font-size: 1.7rem;
+    }
+
+    main form {
+        font-size: medium;
+        display: flex;
+        flex-direction: column;
+        gap: 2vh;
+    }
+
+    main form label {
+        gap: 0px;
+        align-items: initial;
+        flex-direction: column;
+    }
+
+    main form textarea,
+    main form input,
+    main form select {
+        margin-top: 6px;
+    }
+}
+
+@media (min-width: 1600px) {
+    main form {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0 8vw;
+    }
+}

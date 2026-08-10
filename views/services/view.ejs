@@ -1,0 +1,93 @@
+<%- include('../partials/header') %>
+
+<main>
+    <!-- Display Form -->
+    <h1><%= _form.name %></h1>
+    <form class="locked" id="<%= _form.id %>">
+    <%- include(`../partials/forms/${_form.id}`) %>
+    </form>
+
+    <!-- Navigation -->
+    <div class="btn-grp">
+    <% if (_form.ROLE === 'staff') { %>
+        <button id="approve" type="button">Approve</button>
+        <button id="reject" type="button">Reject</button>
+        <button type="button" onclick="window.location.href='/<%= _role %>/applications/pending/<%= _form.id %>'" class="blue">[← Pending</button>
+        <button type="button" onclick="window.location.href='/<%= _role %>/applications/rejected/<%= _form.id %>'" class="blue">[← Rejected</button>
+    <% } else if (_form.ROLE === 'admin') { %>
+        <button id="approve" type="button">Approve</button>
+        <button id="reject" type="button">Reject</button>
+        <button type="button" onclick="window.location.href='/<%= _role %>/applications/reviewed/<%= _form.id %>'" class="blue">[← Reviewed</button>
+        <button type="button" onclick="window.location.href='/<%= _role %>/applications/rejected/<%= _form.id %>'" class="blue">[← Rejected</button>
+    <% } else { %>
+        <button type="button" onclick="window.location.href='/services/apply'" class="blue">[← Apply</button>
+        <button type="button" onclick="window.location.href='/services/status'" class="blue">[← Status</button>
+        <button type="button" onclick="window.location.href='/<%= _role %>/dashboard'" class="blue">[← Dashboard</button>
+    <% } %>
+    </div>
+</main>
+
+<!-- Submit Form Review / Approval -->
+<script>
+    // Fetch form with existing data if any
+    const form = document.getElementById('<%= _form.id %>'),
+        formData = <%- JSON.stringify(_form.data || {}) %>;
+    
+    // Auto-fill form & disable the fields
+    if (Object.keys(formData).length) {
+        form.querySelectorAll('textarea, select, input').forEach(field => {
+            if (field.name in formData && field.type !== 'file') {
+                field.value = field.type === 'date' ? new Date(formData[field.name]).toISOString().split('T')[0] : formData[field.name];
+            }
+            field.tagName === 'SELECT' ? field.disabled = true : field.readOnly = true;
+        });
+    }
+
+    // Fetch btns: approve / reject
+    const approveBtn = document.getElementById('approve'),
+        rejectBtn = document.getElementById('reject');
+
+    // POST form reviewed / approved remarks
+    approveBtn.addEventListener('click', async () => {
+        // Disable btns to avoid multiple clicks
+        approveBtn.disabled = rejectBtn.disabled = true;
+
+        // Fetch to approve form
+        const res = await fetch('/<%= _role %>/application/approve/<%= _form.id %>/<%= _user.id %>', { method: 'POST' });
+        
+        // If accepted display modal to redirect to applications, else stay
+        if (res.ok) {
+            successModal('Application accepted successfully 👍', null);
+            approveBtn.classList.add('display-none');
+            rejectBtn.classList.add('display-none');
+        } else {
+            const resData = await res.json();
+            errorModal('Unable to accept application 😕', resData.errors);
+            approveBtn.disabled = rejectBtn.disabled = false;
+        }
+    });
+    
+    // POST form rejected remarks
+    rejectBtn.addEventListener('click', async () => {
+        // Disable btns to avoid multiple clicks
+        approveBtn.disabled = rejectBtn.disabled = true;
+
+        // Fetch to reject form
+        const res = await fetch('/<%= _role %>/application/reject/<%= _form.id %>/<%= _user.id %>', { method: 'POST' });
+        
+        // If rejected display modal to redirect to applications, else stay
+        if (res.ok) {
+            successModal('Application rejected successfully 👎', null);
+            approveBtn.classList.add('display-none');
+            rejectBtn.classList.add('display-none');
+        } else {
+            const resData = await res.json();
+            errorModal('Unable to reject application 😕', resData.errors);
+            approveBtn.disabled = rejectBtn.disabled = false;
+        }
+    });
+
+    form.addEventListener('submit', e => e.preventDefault());
+</script>
+
+<%- include('../partials/footer') %>

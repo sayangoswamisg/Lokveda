@@ -1,0 +1,34 @@
+<label>
+    Owner Name:
+    <input type="text" name="ownerName" required>
+</label>
+
+<label>
+    Property ID / Holding Number:
+    <input type="text" name="propertyId" required>
+</label>
+
+<label>
+    Property Address:
+    <input type="text" name="address" required>
+</label>
+
+<label>
+    Assessment Year:
+    <input type="number" name="year" min="2000" max="2099" required>
+</label>
+
+<label>
+    Amount Due (₹):
+    <input type="number" name="amount" min="1" required>
+</label>
+
+<label>
+    Payment Method:
+    <select name="paymentMethod" required>
+        <option value="">--Select--</option>
+        <option value="upi">UPI</option>
+        <option value="card">Debit/Credit Card</option>
+        <option value="netbanking">Net Banking</option>
+    </select>
+</label>

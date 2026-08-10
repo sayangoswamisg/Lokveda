@@ -1,0 +1,56 @@
+<%- include('../partials/header') %>
+
+<!-- Display Form -->
+<main>
+    <h1><%= _form.name %></h1>
+    <form id="<%= _form.id %>">
+    <%- include(`../partials/forms/${_form.id}`) %>
+        <div class="btn-grp">
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
+            <button class="blue" type="button" onclick="window.location.href='/services/apply'">[← Apply</button>
+            <button class="blue" type="button" onclick="window.location.href='/services/status'">[← Status</button>
+            <button class="blue" type="button" onclick="window.location.href='/<%= _role %>/dashboard'">[← Dashboard</button>
+        </div>
+    </form>
+</main>
+
+<!-- Submit Form -->
+<script>
+    // Fetch form with existing data if any
+    const form = document.getElementById('<%= _form.id %>'),
+        formData = <%- JSON.stringify(_form.data || {}) %>;
+
+    // Auto-fill form
+    if (Object.keys(formData).length) {
+        form.querySelectorAll('textarea, select, input').forEach(field => {
+            if (field.name in formData)
+                field.value = field.type === 'date' ? formData[field.name].slice(0, 10) : formData[field.name];
+        });
+    }
+
+    form.addEventListener('submit', async e => {
+        // Disable btns
+        e.preventDefault();
+        const btns = document.querySelectorAll('.btn-grp button');
+        btns.forEach(btn => btn.disabled = true);
+        
+        // Fetch & Submit form data via post request
+        const data = Object.fromEntries(new FormData(form).entries());
+        const res = await fetch('/services/apply/<%= _form.id %>', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {'Content-Type': 'application/json'}
+        });
+        
+        // If submitted display modal to redirect to dashboard, else stay
+        if (res.ok) successModal('Form submitted successfully ✅');
+        else {
+            const resData = await res.json();
+            errorModal('Unable to submit form 😕', resData.errors);
+            btns.forEach(btn => btn.disabled = false); // Re-enable btns
+        }
+    });
+</script>
+
+<%- include('../partials/footer') %>

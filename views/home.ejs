@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+
+<main>
+    <section class="wlcm-msg">
+        <figure class="character">👋</figure>
+        <h1>Welcome to LokVeda! — Your E-gram Panchayat</h1>
+        <h2>Please login to access your dashboard</h2>
+    </section>
+    <section id="login-box">
+    <% if (_user) { %>
+        <div onclick="window.location.href='/<%= _role %>/dashboard'"> Go to your Dashboard</div>
+        <div onclick="window.location.href='/<%= _role %>/login'"><%= _role.slice(0, 1).toUpperCase() + _role.slice(1) %> Login</div>
+    <% } else { %>
+        <div onclick="window.location.href='/citizen/login'">Citizen Login / Sign Up</div>
+        <div onclick="window.location.href='/staff/login'">Staff Login</div>
+        <div onclick="window.location.href='/admin/login'">Admin Login</div>
+    <% } %>
+    </section>
+</main>
+
+<%- include('partials/footer') %>

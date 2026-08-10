@@ -1,0 +1,148 @@
+<header id="nav">
+    <ul><li><button title="Toggle Dark Mode?" aria-label="Toggle Dark Mode?" id="dark-mode"><img src="/images/icons/dm.png"></button></li></ul>
+<% if (_user) { %>
+    <ul><li id="greet"></li></ul>
+    <ul><li><button id="logout" title="Logout [→" aria-label="Logout [→">Logout [→</button></li></ul>
+<% } %>
+</header>
+<div id="modal" class="display-none">
+    <div id="modal-box">
+        <p><strong></strong></p>
+        <p class="note"></p>
+        <div class="actions">
+            <button id="modal-confirm"></button>
+            <button id="modal-cancel"></button>
+        </div>
+    </div>
+</div>
+<% if (_user) { %>
+<script>
+    /* **************************************** GREETING BOT ****************************************
+        Dynamic greeting (<li id="greet">) using sunrise/sunset or fallback clock logic. 
+    */
+    (async function initGreetingBot() {
+        const greet = document.getElementById('greet');
+        if (!greet) return console.error('Greeter element not provided');
+
+        const HOUR_MS = 3_600_000; // 1 hour in ms
+        let sunTimes = await fetchSunTimesOnce();
+
+        updateGreeting();
+        scheduleDailyRefresh();
+        greet.classList.add('show');
+
+        function updateGreeting() {
+            const istNow = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })); // Get IST from 'Asia/Kolkata' timezone
+            greet.innerHTML = getGreeting(istNow) + '<br>' + "<%= _user.profile?.name ?? 'Loki >" < ' %>";
+            setTimeout(updateGreeting, HOUR_MS - (Date.now() % HOUR_MS) + 50);
+        }
+
+        // Uses sunrise/sunset if available, otherwise falls back to fixed hours
+        function getGreeting(istDate) {
+            const h = istDate.getHours();
+            if (sunTimes) {
+                const now = istDate.getTime();
+                if (now < sunTimes.sunrise) return 'Good Night!';
+                if (now < sunTimes.sunset) {
+                    if (h < 12) return 'Good Morning!';
+                    if (h < sunTimes.sunset) return 'Good Afternoon!';
+                    return 'Good Evening!';
+                }
+                return 'Good Evening!';
+            }
+            // fallback purely by clock
+            if (h > 16) return 'Good Evening!';
+            if (h < 4) return 'Good Night!';
+            if (h < 12) return 'Good Morning!';
+            return 'Good Afternoon!';
+        }
+
+        // Hits sunrise-sunset API once; fallback if unavailable
+        async function fetchSunTimesOnce() {
+            try { // Fetch:
+                // lon & lat
+                const lat = <%= _user?.areaRef?.lat ?? 'null' %>,
+                    lon = <%= _user?.areaRef?.lon ?? 'null' %>;
+                if (!lat || !lon) return null;
+                // sunrise & sunset
+                const url = `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&formatted=0`,
+                    { results } = await (await fetch(url)).json();
+                return { sunrise: new Date(results.sunrise).getTime(), sunset: new Date(results.sunset).getTime() };
+            } catch (e) {
+                console.warn('Sun-times unavailable → fallback to clock only', e);
+                return null;
+            }
+        }
+
+        // Updates sunTimes daily ~5s after IST midnight
+        function scheduleDailyRefresh() {
+            const istNow = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' })),
+                tomorrow = new Date(istNow);
+            tomorrow.setHours(24, 0, 5, 0);
+            setTimeout(async () => {
+                sunTimes = await fetchSunTimesOnce();
+                scheduleDailyRefresh();
+            }, tomorrow.getTime() - istNow.getTime());
+        }
+    })();
+    /* ********************************************* UTILITIES: MODAL *********************************************
+
+        Selects modal elements and exports two global utility functions that display modals based on their state:
+
+        > mandatory arguments: text; optional arguments: note, btn
+        #errorModal
+        #successModal
+    */
+
+    const modal = document.getElementById('modal'),
+        modalBox = document.getElementById('modal-box'),
+        modalConfirm = document.getElementById('modal-confirm'),
+        modalCancel = document.getElementById('modal-cancel');
+    
+    function errorModal(text, note = '', btn = 'Try Again 😮‍💨') {
+        modalBox.querySelector('p strong').textContent = text;
+        modalBox.querySelector('.note').textContent = note;
+        
+        modalCancel.classList.add('display-none');
+        modalConfirm.classList.remove('display-none');
+        modalConfirm.textContent = btn;
+        
+        modalConfirm.onclick = () => modal.classList.add('display-none');
+        modal.classList.remove('display-none');
+    }
+        
+    function successModal(text, link = '/<%= _role  %>/dashboard', note = '', btn = 'Great 🥳') {
+        modalBox.querySelector('p strong').textContent = text;
+        modalBox.querySelector('.note').textContent = note;
+        
+        modalConfirm.classList.add('display-none');
+        modalCancel.classList.remove('display-none');
+        modalCancel.textContent = btn;
+        
+        modalCancel.onclick = () => {
+            modal.classList.add('display-none');
+            if (link) location.assign(link);
+        };
+        modal.classList.remove('display-none');
+    }
+
+    /* ********************************************* LOGOUT DIALOG BOX ********************************************* */
+
+    // Btns: Logout [→, Cancel
+    document.getElementById('logout').addEventListener('click', () => {
+        modalBox.querySelector('p strong').textContent = 'Do you really want to logout?';
+        modalBox.querySelector('.note').textContent = '⚠️ Accounts might get locked if not logged out properly several times';
+        modalConfirm.classList.remove('display-none');
+        modalCancel.classList.remove('display-none');
+        modalConfirm.textContent = 'Yes, Logout';
+        modalCancel.textContent = 'Cancel';
+        modalConfirm.onclick = () => window.location.href = '/logout';
+        modal.classList.remove('display-none');
+    });
+    modalCancel.onclick = () => {
+        modal.classList.add('display-none');
+        modalBox.querySelector('p strong').textContent = modalBox.querySelector('.note').textContent = modalConfirm.textContent = modalCancel.textContent = '';
+        modalConfirm.onclick = null;
+    };
+</script>
+<% } %>

@@ -1,0 +1,75 @@
+<%- include('partials/header') %>
+
+<main class="profile-card">
+    <img src="/uploads/profile-pics/<%= _user.profile.photoUrl %>" onerror="this.onerror=null; this.src='/images/default-avatar.png'" alt="Profile Picture">
+
+    <h2><%= _user.profile.name %></h2>
+
+    <div class="profile-info">
+        <p><strong>Role:</strong> <%= _user.role.slice(0, 1).toUpperCase() + _user.role.slice(1) %></p>
+        <p><strong>Aadhaar:</strong> <%= _user.aadhaar %></p>
+        <p><strong>Date of Birth:</strong> <%= _user.profile.dob.toLocaleDateString('en-IN') %></p>
+        <p><strong>Email:</strong> <%= _user.profile.email %></p>
+        <p><strong>Phone:</strong> <%= _user.profile.phone %></p>
+        <p><strong>Address:</strong> <%= _user.profile.address %></p>
+        <p><strong>Working / Habituating States:</strong> <%= _user.allowedLocs.join(', ') %></p>
+    </div>
+
+    <div class="btn-grp">
+    <% if (_form.ROLE === 'staff') { %>
+        <button id="approve">Approve</button>
+        <button id="reject">Reject</button>
+        <button onclick="window.location.href='/<%= _role %>/applications/pending/<%= _form.id %>'" class="blue">[← Pending</button>
+        <button onclick="window.location.href='/<%= _role %>/applications/rejected/<%= _form.id %>'" class="blue">[← Rejected</button>
+    <% } else if (_form.ROLE === 'admin') { %>
+        <button id="approve" type="button">Approve</button>
+        <button id="reject" type="button">Reject</button>
+        <button onclick="window.location.href='/<%= _role %>/applications/reviewed/<%= _form.id %>'" class="blue">[← Reviewed</button>
+        <button onclick="window.location.href='/<%= _role %>/applications/rejected/<%= _form.id %>'" class="blue">[← Rejected</button>
+    <% } else { %>
+        <button onclick="window.location.href='/<%= _role %>/dashboard'" class="blue">[← Dashboard</button>
+    <% } %>
+    </div>
+</main>
+
+<script>
+    // Select btns: approve / reject
+    const approveBtn = document.getElementById('approve'),
+        rejectBtn = document.getElementById('reject');
+
+    // POST Approve / Review user profile
+    approveBtn.addEventListener('click', async () => {
+        approveBtn.disabled = rejectBtn.disabled = true;
+        const res = await fetch('/<%= _role %>/profile/approve/<%= _form.id %>/<%= _user.id %>', { method: 'POST' });
+        
+        // If accepted display modal to redirect to applications, else stay
+        if (res.ok) {
+            successModal('Profile accepted successfully 👍', null);
+            approveBtn.classList.add('display-none');
+            rejectBtn.classList.add('display-none');
+        } else {
+            const resData = await res.json();
+            errorModal('Unable to accept profile 😕', resData.errors);
+            approveBtn.disabled = rejectBtn.disabled = false;
+        }
+    });
+    
+    // POST Reject user profile
+    rejectBtn.addEventListener('click', async () => {
+        approveBtn.disabled = rejectBtn.disabled = true;
+        const res = await fetch('/<%= _role %>/profile/reject/<%= _form.id %>/<%= _user.id %>', { method: 'POST' });
+        
+        // If rejected display modal to redirect to applications, else stay
+        if (res.ok) {
+            successModal('Profile rejected successfully 👎', null);
+            approveBtn.classList.add('display-none');
+            rejectBtn.classList.add('display-none');
+        } else {
+            const resData = await res.json();
+            errorModal('Unable to reject profile 😕', resData.errors);
+            approveBtn.disabled = rejectBtn.disabled = false;
+        }
+    });
+</script>
+
+<%- include('partials/footer') %>

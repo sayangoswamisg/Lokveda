@@ -1,0 +1,68 @@
+/* css/services/menu.css */
+
+/* Parent container */
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+    width: 80vw;
+}
+
+/* Sections: Background, Headings & Borders */
+main section h2 {
+    margin-bottom: 1rem;
+}
+
+main>section {
+    border-radius: 1rem;
+    padding: 1rem;
+    background: #c440d53d;
+    border: 1px solid deeppink;
+    --cardHover: #d443e7a8;
+}
+
+main>section.active {
+    background: #b1df6b2b;
+    border: 1px solid green;
+    --cardHover: #a6e743a8;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 2rem;
+}
+
+/* Cards */
+.service-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.service-card:hover {
+    background: var(--cardHover);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px var(--cardHover);
+}
+
+.service-card img {
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
+    margin-bottom: .75rem;
+}
+
+.service-title {
+    margin: 0;
+    text-align: center;
+    line-height: 1.4;
+    font-size: .95rem;
+    font-weight: 600;
+    word-break: break-word;
+}

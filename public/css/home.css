@@ -1,0 +1,88 @@
+/* css/home.css */
+
+main {
+    max-width: 80%;
+}
+
+main>section {
+    padding: 4vmin 0;
+}
+
+#wlcm-msg h1 {
+    word-break: normal;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+/* Container */
+#login-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    background-color: var(--primaryColor);
+    box-shadow: 0 0 20px 0px rgba(135, 207, 235, .85);
+    justify-content: center;
+}
+
+/* Boxes */
+#login-box>div {
+    flex: 1 1 180px;
+    background-color: rgba(135, 207, 235, .85);
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: transform .2s ease;
+    font-size: clamp(1rem, .9rem + .5vw, 1.2rem);
+    font-weight: bold;
+}
+
+#login-box>div:hover {
+    transform: translateY(-5px);
+    background-color: rgba(100, 148, 237, .85);
+}
+
+/* Hand waving animation */
+.character {
+    font-size: 4rem;
+    animation: wave 2s infinite;
+    transform-origin: 70% 70%;
+    width: 40vmin;
+    margin: auto;
+}
+
+@keyframes wave {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    10% {
+        transform: rotate(14deg);
+    }
+
+    20% {
+        transform: rotate(-8deg);
+    }
+
+    30% {
+        transform: rotate(14deg);
+    }
+
+    40% {
+        transform: rotate(-4deg);
+    }
+
+    50% {
+        transform: rotate(10deg);
+    }
+
+    60% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}

@@ -1,0 +1,169 @@
+<% const BASE_URL = 'https://lokveda.onrender.com';
+
+const authConfig = {
+    citizen: {
+        desc: 'avail Panchayat services',
+        keywords: 'Citizen, Citizen Login'
+    },
+    staff: {
+        desc: 'manage users and review applications',
+        keywords: 'Staff, Staff Login, Review Applications'
+    },
+    admin: {
+        desc: 'manage users, approve applications and update services',
+        keywords: 'Admin, Admin Login, Approve Applications'
+    }
+};
+
+const dashboardConfig = {
+    citizen: {
+        desc: 'see service approval status, and stay updated with the latest announcements from your Gram Panchayat',
+        keywords: 'Approval Status, Announcements'
+    },
+    staff: {
+        desc: 'citizen requests, update application statuses, and coordinate with other staff members for efficient Gram Panchayat operations',
+        keywords: 'Update Application Status, Review Applications'
+    },
+    admin: {
+        desc: 'activate or deactivate services and approve applications',
+        keywords: 'Activate Services, Deactivate Services, Approve Applications'
+    }
+};
+
+const serviceName = _form.id ?
+    _form.id
+        .replaceAll('-', ' ')
+        .replace(/\b\w/g, char => char.toUpperCase())
+    : 'All';
+
+const config = {
+    home: {
+        title: 'Welcome to your E-gram Panchayat System',
+        desc: 'Your digital gateway to efficient Gram Panchayat management and citizen services.' ,
+        keywords: 'E-gram Panchayat, LokVeda, Digital Governance, India, Digital Platform, Citizen Services, Gram Panchayat Management',
+        link: BASE_URL
+    },
+    profile: {
+        title: `${_role?.slice(0, 1).toUpperCase() + _role?.slice(1)} Profile`,
+        desc: 'View and update your personal information, contact details, and preferences to ensure seamless access to Gram Panchayat services.' ,
+        keywords: 'Profile, Personal Information, Contact Details, Preferences',
+        link: `${BASE_URL}/profile`
+    },
+    auth: {
+        title: `${_role?.slice(0, 1).toUpperCase() + _role?.slice(1)} Login`,
+        desc: `Login to your dashboard to ${authConfig[_role]?.desc}.`,
+        keywords: `Login, ${authConfig[_role]?.keywords}`,
+        link: `${BASE_URL}/${_role}/auth`
+    },
+    dashboard: {
+        title: `${_role?.slice(0, 1).toUpperCase() + _role?.slice(1)} Dashboard`,
+        desc: `Access your personalized dashboard to manage your profile, apply for services, ${dashboardConfig[_role]?.desc}.`,
+        keywords: `${_role?.slice(0, 1).toUpperCase() + _role?.slice(1)} Dashboard, Profile, Apply for Services, ${dashboardConfig[_role]?.keywords}`,
+        link: `${BASE_URL}/${_role}/dashboard`
+    },
+    service: {
+        title: `Apply for ${_form.name}`,
+        desc: `Fill out the ${_form.name?.toLowerCase()} form to apply for the corresponding service offered by your Gram Panchayat. Ensure you provide accurate information for a smooth application process.`,
+        keywords: `${_form.name} Form, Apply for ${_form.name}, Service Application, Gram Panchayat Forms`,
+        link: `${BASE_URL}/services/apply/${_form.id}`
+    },
+    view: {
+        title: `View ${_form.name}`,
+        desc: `View the ${_form.name?.toLowerCase()} form to peek at the corresponding service offered by your Gram Panchayat.`,
+        keywords: `${_form.name} Form, View ${_form.name}, Service Application, Gram Panchayat Forms`,
+        link: `${BASE_URL}/services/view/${_form.id}`
+    },
+    pending: {
+        title: `Manage Pending ${serviceName} Applications`,
+        desc: `Review newly submitted ${serviceName} applications, verify citizen information, and forward eligible requests for further processing.`,
+        keywords: `Pending Applications, ${serviceName}, Verification, Citizen Requests`,
+        link: `${BASE_URL}/${_role}/applications/pending${_form.id ? '/' + _form.id : ''}`
+    },
+    reviewed: {
+        title: `Manage Reviewed ${serviceName} Applications`,
+        desc: `Evaluate reviewed ${serviceName} applications, inspect recommendations, and make final approval or rejection decisions.`,
+        keywords: `Reviewed Applications, ${serviceName}, Administrative Approval, Final Review`,
+        link: `${BASE_URL}/${_role}/applications/reviewed${_form.id ? '/' + _form.id : ''}`
+    },
+    rejected: {
+        title: `Manage Rejected ${serviceName} Applications`,
+        desc: `Inspect previously rejected ${serviceName} applications, review remarks, and determine whether further action is required.`,
+        keywords: `Rejected Applications, ${serviceName}, Reassessment, Application Review`,
+        link: `${BASE_URL}/${_role}/applications/rejected${_form.id ? '/' + _form.id : ''}`
+    },
+    approved: {
+        title: `View Approved ${serviceName} Applications`,
+        desc: `Browse approved ${serviceName} applications, verify completed requests, and maintain administrative records.`,
+        keywords: `Approved Applications, ${serviceName}, Completed Requests, Administrative Records`,
+        link: `${BASE_URL}/${_role}/applications/approved${_form.id ? '/' + _form.id : ''}`
+    },
+    'services/apply': {
+        title: 'Apply for Services',
+        desc: 'Browse available Gram Panchayat services and submit applications online without visiting the office repeatedly.',
+        keywords: 'Apply Services, Service Application, Online Forms, Citizen Services',
+        link: `${BASE_URL}/services/apply`
+    },
+    'services/status': {
+        title: 'Track Application Status',
+        desc: 'Monitor the progress of your submitted applications and stay informed about approvals, rejections, and pending actions.',
+        keywords: 'Application Status, Track Forms, Service Progress, Citizen Dashboard',
+        link: `${BASE_URL}/services/status`
+    },
+    'services/update': {
+        title: 'Update Services',
+        desc: 'Activate, deactivate, and maintain service availability to ensure citizens only access relevant and operational services.',
+        keywords: 'Update Services, Service Management, Activate Services, Deactivate Services',
+        link: `${BASE_URL}/admin/services/applications`
+    }
+};%>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Basic -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LokVeda — <%= config[_page]?.title || config.home.title %></title>
+
+    <!-- SEO -->
+    <meta name="description" content="<%= 'LokVeda — ' + (config[_page]?.title || config.home.title) + ' . ' + (config[_page]?.desc || config.home.desc) %>">
+    <meta name="keywords" content="<%= config.home.keywords + ', ' + (config[_page]?.keywords || '') %>">
+    <meta name="author" content="LokVeda Team">
+
+    <!-- Theme color (mobile browser bar) -->
+    <meta name="theme-color" content="#2b7cff">
+
+    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+    <meta property="og:title" content="LokVeda — <%= config[_page]?.title || config.home.title %>">
+    <meta property="og:description" content="<%= config[_page]?.desc || config.home.desc %>">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/images/preview.png">
+    <meta property="og:url" content="<%= config[_page]?.link || config.home.link %>">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LokVeda — <%= config[_page]?.title || config.home.title %>">
+    <meta name="twitter:description"content="<%= config[_page]?.desc || config.home.desc %>">
+    <meta name="twitter:image" content="/images/preview.png">
+
+    <!-- No Indexing For Login Pages -->
+<% if (_role === 'citizen' || _role === 'staff' || _role === 'admin') { %>
+    <meta name="robots" content="noindex, nofollow">
+<% } %>
+
+    <!-- Favicon & Style Sheets -->
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="/css/style-global.css">
+    <link rel="stylesheet" href="/css/utilities.css">
+<% if (_css) {
+    for (const _style of _css) { %>
+    <link rel="stylesheet" href="/css/<%= _style %>.css">
+    <% }
+} else if (_page) { %>
+    <link rel="stylesheet" href="/css/<%= _page %>.css">
+<% } %>
+</head>
+
+<body>
+    <%- include('./nav') %>

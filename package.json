@@ -1,0 +1,30 @@
+{
+  "name": "lokveda-v2",
+  "version": "2.0.0",
+  "description": "LokVeda is a web-based **E-Gram Panchayat system** designed to digitize essential village-level services with a strong focus on **authentication, session security, accessibility, and UX clarity**.",
+  "main": "index.js",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.4.2",
+    "ejs": "^5.0.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongodb": "^7.2.0",
+    "mongoose": "^9.6.2",
+    "nodemailer": "^8.0.8",
+    "validator": "^13.15.35"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "Dipsana Roy",
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

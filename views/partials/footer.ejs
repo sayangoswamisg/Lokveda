@@ -1,0 +1,23 @@
+    <footer>
+    <% if (_user) { %>
+        <p style="line-height: 2; text-align: center; font-size: 1rem;">
+            📍 <%= _user.areaRef.name %> | 🕒 Open: <%= _user.areaRef.open %> - <%= _user.areaRef.close %> <br>
+            💬 <a href="mailto:dipsana@zohomail.in?subject=Feedback">Feedback</a> |
+            ❗ <a href="mailto:dipsana@zohomail.in?subject=Complaint">Complaint</a> |
+            📍 <a href="<%= _user.areaRef.mapUrl %>" target="_blank">View Location</a> <br>
+        </p>
+    <% } else { %>
+        <p style="line-height: 2; text-align: center; font-size: 1rem;">
+            Maintained by LokVeda team | <a href="mailto:dipsana@zohomail.in?subject=Feedback&body=Hi Devs,">Email Us</a>
+        </p>
+    <% } %>
+    </footer>
+    <script type="module" data-global="true" src="/js/script-global.js"></script>
+<% if (_js) {
+    for (const script of _js) { %>
+    <script src="/js/<%= script %>.js"></script>
+    <% }
+} %>
+</body>
+
+</html>

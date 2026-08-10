@@ -1,0 +1,45 @@
+/* css/utilities.css: Quick & critical styles */
+
+/* Display */
+.display-none {
+    display: none !important;
+}
+
+/* Button group */
+.btn-grp {
+    padding: 0.5rem;
+    margin: auto;
+    height: max-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Color */
+.blue {
+    background-color: #007bffd6;
+}
+
+.blue:hover {
+    background-color: #0057b3d7;
+}
+
+/* Text */
+.note {
+    font-size: .85rem;
+}
+
+/* Disable any element */
+.disabled {
+    pointer-events: none;
+    user-select: none;
+    opacity: .6;
+}
+
+/* Locked state */
+.locked {
+    pointer-events: none;
+    cursor: not-allowed;
+}

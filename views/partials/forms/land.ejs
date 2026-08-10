@@ -1,0 +1,25 @@
+<label>
+    Applicant Name:
+    <input type="text" name="applicantName" required>
+</label>
+
+<label>
+    Land Address / Location:
+    <textarea name="landLocation" required></textarea>
+</label>
+
+<label>
+    Type of Service:
+    <select name="serviceType" required>
+        <option value="">--Select--</option>
+        <option value="ownership">Ownership Proof</option>
+        <option value="mutation">Mutation Request</option>
+        <option value="boundary">Boundary Correction</option>
+    </select>
+</label>
+
+<label>
+    Upload Relevant Documents:
+    <!-- accept=".pdf,.jpg,.jpeg,.png" multiple -->
+    <input type="file" name="landDocs">
+</label>

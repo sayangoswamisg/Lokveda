@@ -1,0 +1,41 @@
+<%- include('../partials/header') %>
+
+<main>
+    <section class="active">
+        <h2>Active Services</h2>
+        <div class="services-grid">
+        <% let noActive = true;
+        for (const service of _user.areaRef.activeServices) { noActive = false; %>
+            <div class="service-card" onclick="window.location.href='/<%= _role %>/applications/<%= _page %>/<%= service %>'">
+                <img src="/images/services/<%= service %>.avif" onerror="this.onerror=null; this.src='default-service.jpg'" alt="<%= config[service] %>">
+                <p class="service-title"><%= config[service] %></p>
+            </div>
+        <% } %>
+        </div>
+    <% if (noActive) { %>
+        <h2>Currently there are no active services 🤗</h2>
+    <% } %>
+    </section>
+    <section>
+        <h2>Inactive Services</h2>
+        <div class="services-grid">
+        <% noActive = true;
+        for (const service of _user.areaRef.inactiveServices) { noActive = false; %>
+            <div class="service-card" onclick="window.location.href='/<%= _role %>/applications/<%= _page %>/<%= service %>'">
+                <img src="/images/services/<%= service %>.avif" onerror="this.onerror=null; this.src='default-service.jpg'" alt="<%= config[service] %>">
+                <p class="service-title"><%= config[service] %></p>
+            </div>
+        <% } %>
+        </div>
+    <% if (noActive) { %>
+        <h2>Wow! All the services are currently active 🤩</h2>
+    <% } %>
+    </section>
+    
+    <!-- Navigation -->
+    <div class="btn-grp">
+        <button onclick="window.location.href='/<%= _role %>/dashboard'">[← Dashboard</button>
+    </div>
+</main>
+
+<%- include('../partials/footer') %>

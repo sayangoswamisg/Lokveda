@@ -1,0 +1,56 @@
+<%- include('../partials/header') %>
+
+<!-- returns
+    true: rejected / not submitted
+    false: submitted -->
+<% function isServiceRejected(service, services) {
+    if (services.rejected.includes(service)) return true;
+    if (services.pending.includes(service)) return false;
+    if (services.reviewed.includes(service)) return false;
+    if (services.approved.includes(service)) return false;
+    return true;
+}%>
+
+<main>
+    <section class="active">
+        <h2>Active Services</h2>
+        <div class="services-grid">
+        <% let noActive = true;
+        for (const service of _user.areaRef.activeServices) {
+            if (isServiceRejected(service, _user.services)) { noActive = false; %>
+            <div class="service-card" onclick="window.location.href='/services/apply/<%= service %>'">
+                <img src="/images/services/<%= service %>.avif" onerror="this.onerror=null; this.src='default-service.jpg'" alt="<%= config[service] %>">
+                <p class="service-title"><%= config[service] %></p>
+            </div>
+            <% } 
+        } %>
+        </div>
+    <% if (noActive) { %>
+        <h2>Hurray! You're all set 🥳</h2>
+    <% } %>
+    </section>
+    <section>
+        <h2>Inactive Services</h2>
+        <div class="services-grid">
+        <% noActive = true;
+        for (const service of _user.areaRef.inactiveServices) {
+            if (isServiceRejected(service, _user.services)) { noActive = false; %>
+            <div class="service-card" onclick="window.location.href='/services/view/<%= service %>'">
+                <img src="/images/services/<%= service %>.avif" onerror="this.onerror=null; this.src='default-service.jpg'" alt="<%= config[service] %>">
+                <p class="service-title"><%= config[service] %></p>
+            </div>
+            <% }
+        } %>
+        </div>
+    <% if (noActive) { %>
+        <h2>Wow! All the services are currently active 🤩</h2>
+    <% } %>
+    </section>
+
+    <!-- Navigation -->
+    <div class="btn-grp">
+        <button onclick="window.location.href='/<%= _role %>/dashboard'">[← Dashboard</button>
+    </div>
+</main>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,29 @@
+<label>
+    Property Owner Name:
+    <input type="text" name="ownerName" required>
+</label>
+
+<label>
+    Property Address:
+    <textarea name="address" required></textarea>
+</label>
+
+<label>
+    Property ID / Survey Number:
+    <input type="text" name="propertyId" required>
+</label>
+
+<label>
+    Type of Request:
+    <select name="requestType" required>
+        <option value="">--Select--</option>
+        <option value="view">View Record</option>
+        <option value="update">Update Record</option>
+    </select>
+</label>
+
+<label>
+    Upload Ownership Proof (PDF/JPG):
+     <!-- accept=".pdf,.jpg,.jpeg,.png" -->
+    <input type="file" name="ownershipProof">
+</label>

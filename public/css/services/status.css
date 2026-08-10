@@ -1,0 +1,13 @@
+/* css/services/status.css */
+
+section.pending {
+    background: #ffff0029;
+    border: 1px solid yellow;
+    --cardHover: #ffff0070;
+}
+
+section.reviewed {
+    background: #0000ff24;
+    border: 1px solid blue;
+    --cardHover: #0000ff82;
+}
