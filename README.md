@@ -406,17 +406,7 @@ LokVeda follows the MVC (Model-View-Controller) architecture.
 
 ---
 
-##  License
-
-This project is licensed under the MIT License.
-
----
-
 ##  Developer
-
-**Dipsana Roy**
-
-Lead Developer, System Architect, Backend Developer, Frontend Developer, Database Designer, Documentation Author
 
 **Sayan Goswami**
 System Architect, Backend Developer
